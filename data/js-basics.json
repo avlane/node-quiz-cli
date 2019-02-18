@@ -1,0 +1,8 @@
+[
+  {"question": "Which keyword declares a block-scoped variable that can be reassigned?", "answer": "let"},
+  {"question": "What does typeof null return?", "answer": "object"},
+  {"question": "Which array method builds a new array by transforming every element?", "answer": "map"},
+  {"question": "What is the result of 0.1 + 0.2 === 0.3 (true or false)?", "answer": "false"},
+  {"question": "Which global function parses a string into an integer?", "answer": "parseInt"},
+  {"question": "What do you call a function that remembers the variables of the function it was defined in?", "answer": "closure"}
+]
