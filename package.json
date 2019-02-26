@@ -6,7 +6,8 @@
     "quiz": "bin/quiz.js"
   },
   "scripts": {
-    "start": "node bin/quiz.js"
+    "start": "node bin/quiz.js",
+    "test": "node test/run.js"
   },
   "license": "MIT",
   "engines": {

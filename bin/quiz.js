@@ -2,6 +2,7 @@
 'use strict';
 
 const readline = require('readline');
+const engine = require('../lib/engine');
 const questions = require('../data/js-basics.json');
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -16,7 +17,7 @@ function ask() {
   }
   const q = questions[index];
   rl.question(`Q${index + 1}. ${q.question} `, answer => {
-    if (answer.trim().toLowerCase() === q.answer.toLowerCase()) {
+    if (engine.check(q, answer)) {
       console.log('Correct!\n');
       score++;
     } else {
