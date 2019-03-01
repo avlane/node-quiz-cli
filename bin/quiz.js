@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 'use strict';
 
+const path = require('path');
 const readline = require('readline');
 const engine = require('../lib/engine');
-const questions = require('../data/js-basics.json');
+const { load } = require('../lib/questions');
+
+const file = process.argv[2] || path.join(__dirname, '..', 'data', 'js-basics.json');
+let questions;
+try {
+  questions = load(file);
+} catch (err) {
+  console.error('quiz: ' + err.message);
+  process.exit(1);
+}
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 let index = 0;
