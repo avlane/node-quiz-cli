@@ -26,12 +26,12 @@ function ask() {
     return;
   }
   const q = questions[index];
-  rl.question(`Q${index + 1}. ${q.question} `, answer => {
+  rl.question(engine.format(q, index + 1) + '\n> ', answer => {
     if (engine.check(q, answer)) {
       console.log('Correct!\n');
       score++;
     } else {
-      console.log(`Wrong. The answer is: ${q.answer}\n`);
+      console.log(`Wrong. The answer is: ${engine.correctAnswer(q)}\n`);
     }
     index++;
     ask();

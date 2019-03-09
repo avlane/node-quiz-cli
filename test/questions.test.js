@@ -47,3 +47,12 @@ test('bundled question sets are valid', () => {
     assert.ok(load(path.join(data, f)).length > 0, f);
   });
 });
+
+test('validate: options must contain the answer', () => {
+  const q = { question: 'Q?', options: ['a', 'b'], answer: 'c' };
+  assert.throws(() => validate(q, 0), /one of the options/);
+});
+
+test('validate: needs at least two options', () => {
+  assert.throws(() => validate({ question: 'Q?', options: ['a'], answer: 'a' }, 0), /between 2 and 26/);
+});
