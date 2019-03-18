@@ -31,3 +31,23 @@ test('check: multiple choice by text', () => {
   assert.strictEqual(engine.check(q, 'Green'), true);
   assert.strictEqual(engine.check(q, 'blue'), false);
 });
+
+test('check: true/false answers', () => {
+  const yes = { question: 'Sky is blue', answer: true };
+  const no = { question: 'Sky is green', answer: false };
+  ['t', 'true', 'Y', ' yes '].forEach(a => {
+    assert.strictEqual(engine.check(yes, a), true, a);
+    assert.strictEqual(engine.check(no, a), false, a);
+  });
+  ['f', 'FALSE', 'n', 'no'].forEach(a => {
+    assert.strictEqual(engine.check(no, a), true, a);
+    assert.strictEqual(engine.check(yes, a), false, a);
+  });
+  assert.strictEqual(engine.check(yes, 'maybe'), false);
+});
+
+test('format and correctAnswer for true/false', () => {
+  const q = { question: 'Sky is blue', answer: true };
+  assert.strictEqual(engine.format(q, 1), 'Q1. Sky is blue\n  (true or false)');
+  assert.strictEqual(engine.correctAnswer(q), 'true');
+});

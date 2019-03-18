@@ -56,3 +56,7 @@ test('validate: options must contain the answer', () => {
 test('validate: needs at least two options', () => {
   assert.throws(() => validate({ question: 'Q?', options: ['a'], answer: 'a' }, 0), /between 2 and 26/);
 });
+
+test('validate: accepts true/false questions', () => {
+  assert.doesNotThrow(() => validate({ question: 'Q?', answer: false }, 0));
+});
