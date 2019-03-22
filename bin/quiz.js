@@ -15,6 +15,8 @@ try {
   process.exit(1);
 }
 
+questions = engine.shuffle(questions);
+
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 let index = 0;
 let score = 0;

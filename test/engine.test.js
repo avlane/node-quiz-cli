@@ -51,3 +51,29 @@ test('format and correctAnswer for true/false', () => {
   assert.strictEqual(engine.format(q, 1), 'Q1. Sky is blue\n  (true or false)');
   assert.strictEqual(engine.correctAnswer(q), 'true');
 });
+
+function lcg(seed) {
+  let s = seed;
+  return () => {
+    s = (s * 1664525 + 1013904223) % 4294967296;
+    return s / 4294967296;
+  };
+}
+
+test('shuffle: keeps every element and leaves the input alone', () => {
+  const input = [1, 2, 3, 4, 5, 6, 7, 8];
+  const out = engine.shuffle(input, lcg(42));
+  assert.deepStrictEqual(input, [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.deepStrictEqual(out.slice().sort((a, b) => a - b), input);
+});
+
+test('shuffle: same seed, same order', () => {
+  const input = [1, 2, 3, 4, 5, 6, 7, 8];
+  assert.deepStrictEqual(engine.shuffle(input, lcg(7)), engine.shuffle(input, lcg(7)));
+  assert.notDeepStrictEqual(engine.shuffle(input, lcg(7)), input);
+});
+
+test('shuffle: empty and single element lists', () => {
+  assert.deepStrictEqual(engine.shuffle([]), []);
+  assert.deepStrictEqual(engine.shuffle(['x']), ['x']);
+});
