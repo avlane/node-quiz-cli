@@ -5,17 +5,26 @@ const path = require('path');
 const readline = require('readline');
 const engine = require('../lib/engine');
 const { load } = require('../lib/questions');
+const { readArgs, USAGE } = require('../lib/args');
 
-const file = process.argv[2] || path.join(__dirname, '..', 'data', 'js-basics.json');
+const DEFAULT_FILE = path.join(__dirname, '..', 'data', 'js-basics.json');
+
+let opts;
 let questions;
 try {
-  questions = load(file);
+  opts = readArgs(process.argv.slice(2));
+  if (opts.help) {
+    console.log(USAGE);
+    process.exit(0);
+  }
+  questions = load(opts.file || DEFAULT_FILE);
 } catch (err) {
   console.error('quiz: ' + err.message);
   process.exit(1);
 }
 
-questions = engine.shuffle(questions);
+if (opts.shuffle) questions = engine.shuffle(questions);
+if (opts.count) questions = questions.slice(0, opts.count);
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 let index = 0;
