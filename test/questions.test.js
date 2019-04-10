@@ -60,3 +60,8 @@ test('validate: needs at least two options', () => {
 test('validate: accepts true/false questions', () => {
   assert.doesNotThrow(() => validate({ question: 'Q?', answer: false }, 0));
 });
+
+test('validate: answer lists must not be empty', () => {
+  assert.throws(() => validate({ question: 'Q?', answer: [] }, 0), /answer list/);
+  assert.doesNotThrow(() => validate({ question: 'Q?', answer: ['a', 'b'] }, 0));
+});

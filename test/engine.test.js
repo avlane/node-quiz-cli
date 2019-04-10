@@ -77,3 +77,17 @@ test('shuffle: empty and single element lists', () => {
   assert.deepStrictEqual(engine.shuffle([]), []);
   assert.deepStrictEqual(engine.shuffle(['x']), ['x']);
 });
+
+test('check: any of several accepted answers', () => {
+  const q = { question: 'Nickname for JavaScript?', answer: ['js', 'javascript', 'ecmascript'] };
+  assert.strictEqual(engine.check(q, 'JS'), true);
+  assert.strictEqual(engine.check(q, 'ECMAScript'), true);
+  assert.strictEqual(engine.check(q, 'java'), false);
+  assert.strictEqual(engine.correctAnswer(q), 'js');
+});
+
+test('check: collapses inner whitespace', () => {
+  const q = { question: 'Two words', answer: 'event   loop' };
+  assert.strictEqual(engine.check(q, 'event loop'), true);
+  assert.strictEqual(engine.check(q, '  Event \t Loop  '), true);
+});

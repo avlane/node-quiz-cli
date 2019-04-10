@@ -4,7 +4,7 @@
   {"question": "Which array method builds a new array by transforming every element?", "answer": "map"},
   {"question": "Does 0.1 + 0.2 === 0.3 in JavaScript?", "answer": false},
   {"question": "Which global function parses a string into an integer?", "answer": "parseInt"},
-  {"question": "What do you call a function that remembers the variables of the function it was defined in?", "answer": "closure"},
+  {"question": "What do you call a function that remembers the variables of the function it was defined in?", "answer": ["closure", "a closure"]},
   {"question": "Which of these is NOT a primitive type?", "options": ["string", "symbol", "object", "boolean"], "answer": "object"},
   {"question": "Which method adds an element to the end of an array?", "options": ["push", "pop", "shift", "unshift"], "answer": "push"},
   {"question": "Arrays are objects in JavaScript.", "answer": true},
