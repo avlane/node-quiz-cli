@@ -65,3 +65,8 @@ test('validate: answer lists must not be empty', () => {
   assert.throws(() => validate({ question: 'Q?', answer: [] }, 0), /answer list/);
   assert.doesNotThrow(() => validate({ question: 'Q?', answer: ['a', 'b'] }, 0));
 });
+
+test('validate: explanation must be text when present', () => {
+  assert.throws(() => validate({ question: 'Q?', answer: 'a', explanation: '' }, 0), /explanation/);
+  assert.doesNotThrow(() => validate({ question: 'Q?', answer: 'a', explanation: 'Because.' }, 0));
+});

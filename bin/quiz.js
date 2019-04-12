@@ -42,7 +42,9 @@ function ask() {
       console.log('Correct!\n');
       score++;
     } else {
-      console.log(`Wrong. The answer is: ${engine.correctAnswer(q)}\n`);
+      console.log(`Wrong. The answer is: ${engine.correctAnswer(q)}`);
+      if (q.explanation) console.log(q.explanation);
+      console.log('');
     }
     index++;
     ask();
