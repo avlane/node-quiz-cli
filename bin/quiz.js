@@ -4,12 +4,14 @@
 const path = require('path');
 const readline = require('readline');
 const engine = require('../lib/engine');
-const { load } = require('../lib/questions');
+const { load, listSets, resolveSet } = require('../lib/questions');
 const { readArgs, USAGE } = require('../lib/args');
 
-const DEFAULT_FILE = path.join(__dirname, '..', 'data', 'js-basics.json');
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const DEFAULT_FILE = path.join(DATA_DIR, 'js-basics.json');
 
 let opts;
+let file;
 let questions;
 try {
   opts = readArgs(process.argv.slice(2));
@@ -17,7 +19,12 @@ try {
     console.log(USAGE);
     process.exit(0);
   }
-  questions = load(opts.file || DEFAULT_FILE);
+  if (opts.list) {
+    for (const set of listSets(DATA_DIR)) console.log(`${set.name}  (${set.count} questions)`);
+    process.exit(0);
+  }
+  file = resolveSet(opts.file || DEFAULT_FILE, DATA_DIR);
+  questions = load(file);
 } catch (err) {
   console.error('quiz: ' + err.message);
   process.exit(1);

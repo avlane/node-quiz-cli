@@ -5,7 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { test } = require('./harness');
-const { load, validate } = require('../lib/questions');
+const { load, validate, resolveSet, listSets } = require('../lib/questions');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'quiz-test-'));
 process.on('exit', () => {
@@ -69,4 +69,18 @@ test('validate: answer lists must not be empty', () => {
 test('validate: explanation must be text when present', () => {
   assert.throws(() => validate({ question: 'Q?', answer: 'a', explanation: '' }, 0), /explanation/);
   assert.doesNotThrow(() => validate({ question: 'Q?', answer: 'a', explanation: 'Because.' }, 0));
+});
+
+test('resolveSet: bare names resolve inside the data directory', () => {
+  const file = write('mine.json', [{ question: 'Q?', answer: 'A' }]);
+  assert.strictEqual(resolveSet('mine', dir), file);
+  assert.strictEqual(resolveSet('mine.json', dir), file);
+  assert.strictEqual(resolveSet(file, '/nonexistent'), file);
+  assert.strictEqual(resolveSet('absent', dir), 'absent');
+});
+
+test('listSets: names and counts of the bundled sets', () => {
+  const sets = listSets(path.join(__dirname, '..', 'data'));
+  assert.deepStrictEqual(sets.map(s => s.name), ['js-basics', 'node-trivia']);
+  assert.ok(sets.every(s => s.count > 0));
 });
