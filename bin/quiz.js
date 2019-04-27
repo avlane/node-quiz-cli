@@ -34,26 +34,30 @@ if (opts.shuffle) questions = engine.shuffle(questions);
 if (opts.count) questions = questions.slice(0, opts.count);
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-let index = 0;
-let score = 0;
+const results = [];
+
+function printSummary() {
+  const s = engine.summarize(results);
+  console.log(`\nYou got ${s.correct} of ${s.total} right (${s.percent}%), grade ${s.grade}.`);
+}
 
 function ask() {
-  if (index >= questions.length) {
-    console.log(`\nYou scored ${score} out of ${questions.length}.`);
+  if (results.length >= questions.length) {
+    printSummary();
     rl.close();
     return;
   }
-  const q = questions[index];
-  rl.question(engine.format(q, index + 1) + '\n> ', answer => {
-    if (engine.check(q, answer)) {
+  const q = questions[results.length];
+  rl.question(engine.format(q, results.length + 1) + '\n> ', answer => {
+    const correct = engine.check(q, answer);
+    results.push({ question: q, correct });
+    if (correct) {
       console.log('Correct!\n');
-      score++;
     } else {
       console.log(`Wrong. The answer is: ${engine.correctAnswer(q)}`);
       if (q.explanation) console.log(q.explanation);
       console.log('');
     }
-    index++;
     ask();
   });
 }

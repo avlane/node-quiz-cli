@@ -91,3 +91,15 @@ test('check: collapses inner whitespace', () => {
   assert.strictEqual(engine.check(q, 'event loop'), true);
   assert.strictEqual(engine.check(q, '  Event \t Loop  '), true);
 });
+
+test('summarize: counts and grades', () => {
+  const mk = (n, ok) => new Array(n).fill({ question: {}, correct: ok });
+  assert.deepStrictEqual(engine.summarize(mk(9, true).concat(mk(1, false))),
+    { correct: 9, total: 10, percent: 90, grade: 'A' });
+  assert.strictEqual(engine.summarize(mk(4, true).concat(mk(1, false))).grade, 'B');
+  assert.strictEqual(engine.summarize(mk(1, true).concat(mk(1, false))).grade, 'F');
+});
+
+test('summarize: no answers at all', () => {
+  assert.deepStrictEqual(engine.summarize([]), { correct: 0, total: 0, percent: 0, grade: 'F' });
+});
