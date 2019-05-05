@@ -35,6 +35,7 @@ if (opts.count) questions = questions.slice(0, opts.count);
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const results = [];
+let finished = false;
 
 function printSummary() {
   const s = engine.summarize(results);
@@ -43,6 +44,7 @@ function printSummary() {
 
 function ask() {
   if (results.length >= questions.length) {
+    finished = true;
     printSummary();
     rl.close();
     return;
@@ -61,5 +63,11 @@ function ask() {
     ask();
   });
 }
+
+rl.on('close', () => {
+  if (finished) return;
+  console.log('\nStopped early.');
+  if (results.length) printSummary();
+});
 
 ask();
