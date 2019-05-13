@@ -5,7 +5,7 @@ const { test } = require('./harness');
 const { readArgs } = require('../lib/args');
 
 test('readArgs: defaults', () => {
-  assert.deepStrictEqual(readArgs([]), { file: null, count: null, shuffle: true, help: false, list: false });
+  assert.deepStrictEqual(readArgs([]), { file: null, count: null, shuffle: true, help: false, list: false, scores: false });
 });
 
 test('readArgs: file and count', () => {
