@@ -5,7 +5,7 @@ const { test } = require('./harness');
 const { readArgs } = require('../lib/args');
 
 test('readArgs: defaults', () => {
-  assert.deepStrictEqual(readArgs([]), { file: null, count: null, shuffle: true, help: false, list: false, scores: false });
+  assert.deepStrictEqual(readArgs([]), { file: null, count: null, shuffle: true, help: false, list: false, scores: false, category: null });
 });
 
 test('readArgs: file and count', () => {
@@ -26,4 +26,9 @@ test('readArgs: rejects bad input', () => {
   assert.throws(() => readArgs(['-n', 'abc']), /positive integer/);
   assert.throws(() => readArgs(['-n', '0']), /positive integer/);
   assert.throws(() => readArgs(['--bogus']), /unknown option/);
+});
+
+test('readArgs: category', () => {
+  assert.strictEqual(readArgs(['--category', 'arrays']).category, 'arrays');
+  assert.throws(() => readArgs(['--category']), /needs a name/);
 });

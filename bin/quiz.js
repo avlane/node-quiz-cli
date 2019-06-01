@@ -51,8 +51,12 @@ async function main() {
 
   const file = resolveSet(opts.file || DEFAULT_FILE, DATA_DIR);
   let questions = load(file);
-  if (opts.shuffle) questions = engine.shuffle(questions);
-  if (opts.count) questions = questions.slice(0, opts.count);
+  questions = engine.pick(questions, {
+    count: opts.count,
+    category: opts.category,
+    shuffle: opts.shuffle
+  });
+  if (questions.length === 0) throw new Error(`no questions found in category "${opts.category}"`);
 
   const { results, aborted } = await runSession({
     questions,

@@ -1,10 +1,10 @@
 [
-  {"question": "Which core module reads and writes files?", "answer": "fs"},
-  {"question": "Which global object holds the command line arguments in process.argv?", "answer": "process"},
-  {"question": "What is the name of the package manager that ships with Node?", "answer": "npm"},
-  {"question": "Which library gives Node its cross-platform asynchronous I/O?", "answer": "libuv"},
-  {"question": "Which object do you assign to when a CommonJS module wants to export a single function?", "answer": "module.exports"},
-  {"question": "Which JavaScript engine does Node use?", "options": ["SpiderMonkey", "V8", "Chakra", "JavaScriptCore"], "answer": "V8"},
-  {"question": "Node runs your JavaScript on a single thread.", "answer": true, "explanation": "I/O is handed to libuv, but your callbacks all run on the main thread."},
-  {"question": "Which function loads a CommonJS module?", "answer": "require"}
+  {"category": "modules", "question": "Which core module reads and writes files?", "answer": "fs"},
+  {"category": "runtime", "question": "Which global object holds the command line arguments in process.argv?", "answer": "process"},
+  {"category": "tooling", "question": "What is the name of the package manager that ships with Node?", "answer": "npm"},
+  {"category": "runtime", "question": "Which library gives Node its cross-platform asynchronous I/O?", "answer": "libuv"},
+  {"category": "modules", "question": "Which object do you assign to when a CommonJS module wants to export a single function?", "answer": "module.exports"},
+  {"category": "runtime", "question": "Which JavaScript engine does Node use?", "options": ["SpiderMonkey", "V8", "Chakra", "JavaScriptCore"], "answer": "V8"},
+  {"category": "runtime", "question": "Node runs your JavaScript on a single thread.", "answer": true, "explanation": "I/O is handed to libuv, but your callbacks all run on the main thread."},
+  {"category": "modules", "question": "Which function loads a CommonJS module?", "answer": "require"}
 ]

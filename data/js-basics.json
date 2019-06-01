@@ -1,12 +1,12 @@
 [
-  {"question": "Which keyword declares a block-scoped variable that can be reassigned?", "answer": "let"},
-  {"question": "What does typeof null return?", "answer": "object", "explanation": "It is a historical bug in the language that was never fixed."},
-  {"question": "Which array method builds a new array by transforming every element?", "answer": "map"},
-  {"question": "Does 0.1 + 0.2 === 0.3 in JavaScript?", "answer": false, "explanation": "Numbers are binary floating point, so the sum is 0.30000000000000004."},
-  {"question": "Which global function parses a string into an integer?", "answer": "parseInt"},
-  {"question": "What do you call a function that remembers the variables of the function it was defined in?", "answer": ["closure", "a closure"]},
-  {"question": "Which of these is NOT a primitive type?", "options": ["string", "symbol", "object", "boolean"], "answer": "object"},
-  {"question": "Which method adds an element to the end of an array?", "options": ["push", "pop", "shift", "unshift"], "answer": "push"},
-  {"question": "Arrays are objects in JavaScript.", "answer": true},
-  {"question": "A const binding makes the value it holds immutable.", "answer": false}
+  {"category": "variables", "question": "Which keyword declares a block-scoped variable that can be reassigned?", "answer": "let"},
+  {"category": "types", "question": "What does typeof null return?", "answer": "object", "explanation": "It is a historical bug in the language that was never fixed."},
+  {"category": "arrays", "question": "Which array method builds a new array by transforming every element?", "answer": "map"},
+  {"category": "types", "question": "Does 0.1 + 0.2 === 0.3 in JavaScript?", "answer": false, "explanation": "Numbers are binary floating point, so the sum is 0.30000000000000004."},
+  {"category": "types", "question": "Which global function parses a string into an integer?", "answer": "parseInt"},
+  {"category": "functions", "question": "What do you call a function that remembers the variables of the function it was defined in?", "answer": ["closure", "a closure"]},
+  {"category": "types", "question": "Which of these is NOT a primitive type?", "options": ["string", "symbol", "object", "boolean"], "answer": "object"},
+  {"category": "arrays", "question": "Which method adds an element to the end of an array?", "options": ["push", "pop", "shift", "unshift"], "answer": "push"},
+  {"category": "arrays", "question": "Arrays are objects in JavaScript.", "answer": true},
+  {"category": "variables", "question": "A const binding makes the value it holds immutable.", "answer": false}
 ]

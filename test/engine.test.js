@@ -103,3 +103,20 @@ test('summarize: counts and grades', () => {
 test('summarize: no answers at all', () => {
   assert.deepStrictEqual(engine.summarize([]), { correct: 0, total: 0, percent: 0, grade: 'F' });
 });
+
+test('pick: filters by category before trimming', () => {
+  const qs = [
+    { category: 'a', question: '1', answer: 'x' },
+    { category: 'b', question: '2', answer: 'x' },
+    { category: 'a', question: '3', answer: 'x' }
+  ];
+  assert.deepStrictEqual(engine.pick(qs, { category: 'a', shuffle: false }).map(q => q.question), ['1', '3']);
+  assert.deepStrictEqual(engine.pick(qs, { category: 'a', shuffle: false, count: 1 }).map(q => q.question), ['1']);
+  assert.deepStrictEqual(engine.pick(qs, { category: 'zzz' }), []);
+});
+
+test('pick: without options returns every question', () => {
+  const qs = [{ question: '1', answer: 'x' }, { question: '2', answer: 'x' }];
+  assert.strictEqual(engine.pick(qs).length, 2);
+  assert.strictEqual(engine.pick(qs, { count: 1 }).length, 1);
+});
