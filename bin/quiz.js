@@ -14,6 +14,10 @@ const DEFAULT_FILE = path.join(DATA_DIR, 'js-basics.json');
 function printSummary(results) {
   const s = engine.summarize(results);
   console.log(`\nYou got ${s.correct} of ${s.total} right (${s.percent}%), grade ${s.grade}.`);
+  const cats = Object.entries(engine.byCategory(results));
+  if (cats.length > 1) {
+    for (const [name, t] of cats) console.log(`  ${name}: ${t.correct}/${t.total}`);
+  }
 }
 
 function saveScore(file, results) {

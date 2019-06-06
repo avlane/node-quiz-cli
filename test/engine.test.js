@@ -120,3 +120,17 @@ test('pick: without options returns every question', () => {
   assert.strictEqual(engine.pick(qs).length, 2);
   assert.strictEqual(engine.pick(qs, { count: 1 }).length, 1);
 });
+
+test('byCategory: tallies right and wrong answers', () => {
+  const results = [
+    { question: { category: 'a' }, correct: true },
+    { question: { category: 'a' }, correct: false },
+    { question: { category: 'b' }, correct: true },
+    { question: {}, correct: false }
+  ];
+  assert.deepStrictEqual(engine.byCategory(results), {
+    a: { correct: 1, total: 2 },
+    b: { correct: 1, total: 1 },
+    general: { correct: 0, total: 1 }
+  });
+});
